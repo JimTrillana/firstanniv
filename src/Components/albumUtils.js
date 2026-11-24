@@ -30,7 +30,7 @@ export const renderMedia = (media, className = "") => {
     return (
       <video
         className={className}
-        src={media.src}
+        src={`${process.env.PUBLIC_URL}/${media.src.replace(/^\/+/, '')}`}
         poster={media.poster}
         controls
         playsInline
@@ -42,7 +42,7 @@ export const renderMedia = (media, className = "") => {
   return (
     <img
       className={className}
-      src={media.src}
+      src={`${process.env.PUBLIC_URL}/${media.src.replace(/^\/+/, '')}`}
       alt={media.title || "Album memory"}
     />
   );
