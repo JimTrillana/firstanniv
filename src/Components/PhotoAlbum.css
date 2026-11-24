@@ -1,0 +1,603 @@
+
+/* =====================================
+   MAIN PHOTO GALLERY
+===================================== */
+
+.gallery {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 95%;
+  max-width: 1100px;
+  perspective: 1000px;
+  z-index: 1;
+}
+
+.gallery-content {
+  position: relative;
+  transition: filter 0.4s ease;
+}
+
+.gallery__row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin-bottom: 25px;
+}
+
+.gallery__row__image {
+  flex: 0 0 calc(33.333% - 20px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+}
+
+.postcard {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 4px;
+  transform-style: preserve-3d;
+  box-shadow:
+    0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+    0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 2.3px 70.9px rgba(0, 0, 0, 0.072);
+  transition:
+    transform 0.7s ease,
+    box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+/* Organized gallery when hovered or preview is open */
+.gallery-display .gallery__row {
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  margin-bottom: 25px;
+}
+
+.gallery-display .gallery__row__image {
+  flex: 0 0 calc(33.333% - 20px);
+}
+
+.gallery-display .postcard {
+  transform: none !important;
+  z-index: 1;
+}
+
+.gallery-display .postcard:hover {
+  transform: translateY(-8px) scale(1.03) !important;
+  z-index: 10;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.postcard__front {
+  background-color: floralwhite;
+  box-sizing: border-box;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+.postcard__front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* =====================================
+   PREVIEW OVERLAY
+===================================== */
+
+.preview-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 25px;
+  box-sizing: border-box;
+
+  background:#a9d8e2;
+  backdrop-filter: blur(6px);
+
+  animation: fadeIn 0.3s ease;
+}
+
+
+/* =====================================
+   ALBUM CONTAINER
+===================================== */
+
+.preview-container {
+  position: relative;
+
+  width: 95%;
+  max-width: 1100px;
+  max-height: 90vh;
+
+  padding: 25px;
+  box-sizing: border-box;
+
+  overflow-y: auto;
+  background: floralwhite;
+  border-radius: 14px;
+
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.5);
+
+  animation: postcardOpen 0.4s ease;
+}
+
+
+/* =====================================
+   MAIN IMAGE AND DESCRIPTION
+===================================== */
+
+
+.preview-main {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  min-height: 350px;
+}
+
+.preview-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.preview-image img {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 350px;
+  object-fit: contain;
+  display: block;
+}
+
+.preview-image video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 350px;
+  object-fit: contain;
+  box-sizing: border-box;
+}
+
+.preview-description {
+  flex: 4;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 15px;
+  box-sizing: border-box;
+
+  color: #333;
+  font-family: "Shadows Into Light", cursive;
+}
+
+.preview-description h2 {
+  font-size: 30px;
+  margin: 0 0 15px;
+  color: #292929;
+}
+
+.preview-description p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #666;
+}
+
+
+/* =====================================
+   MUSIC BOX
+===================================== */
+
+/* Music box attached to overlay's top-left corner */
+.music-box {
+  position: absolute;
+  top: 80px;
+  left: -170px;
+  z-index: 100;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+
+  width: 180px;
+  padding: 12px;
+
+  background: #181818;
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.music-cover {
+  width: 100%;
+  height: 155px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.music-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.music-info h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.music-info p {
+  margin: 5px 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+
+.music-info span {
+  margin-top: 5px;
+  color: #1ed760;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .music-box {
+    position: fixed;
+    top: auto;
+    bottom: 25px;
+    left: 20px;
+  transform: translateY(-120%);
+    width: calc(100% - 40px);
+    height: 75px;
+    min-height: 75px;
+    padding: 8px 12px;
+    gap: 12px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    border-radius: 12px;
+    box-sizing: border-box;
+    z-index: 99999;
+  }
+
+  .music-cover {
+    width: 58px;
+    height: 58px;
+    flex-shrink: 0;
+  }
+
+  .music-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .music-info h3 {
+    font-size: 13px;
+  }
+}
+
+/* =====================================
+   MORE MEMORIES / THUMBNAIL GALLERY
+===================================== */
+
+.preview-gallery {
+  width: 100%;
+  margin-top: 30px;
+}
+
+.preview-gallery h3 {
+  margin: 0 0 15px;
+  font-size: 21px;
+  color: #333;
+}
+
+.preview-thumbnails {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.preview-thumbnail {
+  position: relative;
+  height: 110px;
+  min-width: 0;
+
+  overflow: hidden;
+  border: 3px solid transparent;
+  border-radius: 8px;
+
+  cursor: pointer;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.preview-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.preview-thumbnail span {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  padding: 7px 4px;
+  box-sizing: border-box;
+
+  background: rgba(0, 0, 0, 0.65);
+  color: white;
+
+  font-size: 11px;
+  text-align: center;
+}
+
+.preview-thumbnail:hover {
+  transform: translateY(-5px);
+}
+
+.preview-thumbnail.active {
+  border-color: #28a745;
+  box-shadow: 0 0 12px rgba(40, 167, 69, 0.5);
+}
+
+
+/* =====================================
+   CLOSE BUTTON
+===================================== */
+
+.close-preview {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 101;
+
+  width: 40px;
+  height: 40px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #222;
+  color: white;
+
+  font-size: 27px;
+  cursor: pointer;
+
+  transition: 0.3s ease;
+}
+
+.close-preview:hover {
+  background: #e74c3c;
+  transform: rotate(90deg);
+}
+
+
+/* =====================================
+   ANIMATIONS
+===================================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes postcardOpen {
+  from {
+    opacity: 0;
+    transform: scale(0.85) rotate(-3deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+
+/* =====================================
+   RESPONSIVE DESIGN
+===================================== */
+
+@media (max-width: 768px) {
+
+  /* Main gallery */
+  .gallery {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    padding: 25px 10px;
+    box-sizing: border-box;
+  }
+
+  .gallery__row__image,
+  .gallery-display .gallery__row__image {
+    flex: 0 0 100%;
+  }
+
+  .postcard {
+    width: min(300px, 85vw) !important;
+    height: 200px !important;
+  }
+
+  /* Preview overlay */
+  .preview-overlay {
+     position: relative;
+    padding: 12px;
+  }
+
+  .preview-container {
+    width: 100%;
+    max-height: 95vh;
+    padding: 18px;
+  }
+
+  /* Stack image and description */
+ .preview-image img,
+.preview-image video {
+  width: 100%;
+  max-height: 500px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.preview-thumbnail img,
+.preview-thumbnail video {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+  display: block;
+}
+
+.preview-thumbnail {
+  cursor: pointer;
+  overflow: hidden;
+}
+
+  .music-box {
+    position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 100;
+  }
+}
+
+@media (max-width: 400px) {
+  .preview-thumbnails {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .preview-image {
+    height: 220px;
+  }
+}
+
+.photo-note {
+  position: relative;
+  width: 50%;
+  max-width: 50%;
+  margin: 20px auto;
+  padding: 22px 28px;
+  box-sizing: border-box;
+  background: #fff8dc;
+  color: #4a4035;
+  box-shadow: 2px 5px 12px rgba(0, 0, 0, 0.18);
+  transform: rotate(-1deg);
+  border-radius: 2px;
+}
+
+.photo-note::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(2deg);
+  width: 65px;
+  height: 20px;
+  background: rgba(220, 200, 150, 0.65);
+}
+
+.photo-note h2 {
+  margin: 0 0 10px;
+  font-family: Georgia, serif;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.photo-note p {
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: 15px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.heart-animation {
+  position: absolute;
+  right: -10.5%;
+  top: 20%;
+  z-index: 10;
+
+  font-size: 400px;
+  color: #ff4d6d;
+
+  transform: translateY(-50%) rotate(15deg);
+  transform-origin: center;
+
+  animation: heartBeat 5.3s ease-in-out infinite,
+             heartFloat 4s ease-in-out infinite;
+
+  text-shadow: 0 0 25px rgba(255, 77, 109, 0.5);
+  pointer-events: none;
+}
+
+@keyframes heartBeat {
+  0%, 100% {
+    scale: 1;
+  }
+  25% {
+    scale: 1.15;
+  }
+  40% {
+    scale: 1;
+  }
+  60% {
+    scale: 1.1;
+  }
+}
+
+@keyframes heartFloat {
+  0%, 100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heart-animation {
+    right: 5%;
+    font-size: 55px;
+  }
+}
+
