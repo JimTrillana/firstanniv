@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/firstanniv/static/css/main.2e730ca1.css",
-    "main.js": "/firstanniv/static/js/main.dbb71e05.js",
+    "main.js": "/firstanniv/static/js/main.e4b0a05f.js",
     "static/js/453.da6f333a.chunk.js": "/firstanniv/static/js/453.da6f333a.chunk.js",
     "index.html": "/firstanniv/index.html",
     "main.2e730ca1.css.map": "/firstanniv/static/css/main.2e730ca1.css.map",
-    "main.dbb71e05.js.map": "/firstanniv/static/js/main.dbb71e05.js.map",
+    "main.e4b0a05f.js.map": "/firstanniv/static/js/main.e4b0a05f.js.map",
     "453.da6f333a.chunk.js.map": "/firstanniv/static/js/453.da6f333a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2e730ca1.css",
-    "static/js/main.dbb71e05.js"
+    "static/js/main.e4b0a05f.js"
   ]
 }
