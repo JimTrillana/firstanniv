@@ -151,7 +151,7 @@ export default function LoveChat({ onClose }) {
 
         <div className="love-chat-header">
           <div className="chat-avatar"> <img
-                src="/images/myan.jpeg"
+                src={`${process.env.PUBLIC_URL}/images/myan.jpeg`}
                 alt="Bebe"
             /></div>
 
@@ -184,7 +184,7 @@ export default function LoveChat({ onClose }) {
         >
             {message.sender === "bebe" && (
             <img
-                src="/images/myan.jpeg"
+                src={`${process.env.PUBLIC_URL}/images/myan.jpeg`}
                 alt="Bebe"
                 className="small-avatar"
             />
@@ -200,7 +200,7 @@ export default function LoveChat({ onClose }) {
 
             {message.sender === "you" && (
             <img
-                src="/images/jim.jpeg"
+                src={`${process.env.PUBLIC_URL}/images/jim.jpeg`}
                 alt="You"
                 className="small-avatar you-avatar"
             />
@@ -212,7 +212,7 @@ export default function LoveChat({ onClose }) {
         <div className={`chat-message-row ${typingSender}`}>
             {typingSender === "bebe" && (
             <img
-                src="/images/myan.jpeg"
+                src={`${process.env.PUBLIC_URL}/images/myan.jpeg`}
                 alt="Bebe"
                 className="small-avatar"
             />
@@ -226,7 +226,7 @@ export default function LoveChat({ onClose }) {
 
             {typingSender === "you" && (
             <img
-                src="/images/jim.jpeg"
+                src={`${process.env.PUBLIC_URL}/images/jim.jpeg`}
                 alt="You"
                 className="small-avatar you-avatar"
             />

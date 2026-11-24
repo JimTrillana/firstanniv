@@ -78,7 +78,7 @@ export default function AlbumPreview({
                   </div>
                 ) : (
                   <img
-                    src={media.src}
+                    src={`${process.env.PUBLIC_URL}/${media.src.replace(/^\/+/, '')}`}
                     alt={media.title || "Photo thumbnail"}
                   />
                 )}

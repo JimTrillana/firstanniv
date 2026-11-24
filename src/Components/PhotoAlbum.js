@@ -97,7 +97,8 @@ export default function PhotoAlbum({ mainAudioRef }) {
       audio.currentTime = 0;
 
       if (album.music) {
-        audio.src = album.music;
+        const musicPath = `${process.env.PUBLIC_URL}/${album.music.replace(/^\/+/, '')}`;
+        audio.src = musicPath;
         audio.load();
 
         try {
@@ -167,7 +168,7 @@ const closePreview = async () => {
                   >
                     <div className="postcard__front">
                       <img
-                        src={album.cover}
+                        src={`${process.env.PUBLIC_URL}/${album.cover.replace(/^\/+/, '')}`}
                         alt={album.title}
                       />
                     </div>

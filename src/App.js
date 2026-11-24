@@ -107,7 +107,7 @@ function App() {
 
 <audio
   ref={mainAudioRef}
-  src="/audio/DontGo.mp3"
+  src={`${process.env.PUBLIC_URL}/audio/DontGo.mp3`}
   preload="auto"
   loop
 />
